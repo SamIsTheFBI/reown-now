@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
 import { Header, RootLayout } from "~/components";
-import { NextPageWithLayout } from "~/types";
+import { type NextPageWithLayout } from "~/types";
 
 import { api } from "~/utils/api";
 
