@@ -30,22 +30,29 @@ export default function Header() {
               <SheetContent
                 side="left"
               >
-                <nav className="flex flex-col gap-4 ml-4 mt-4">
-                  {routes.map((route: { href: string, label: string }, id: number) => (
-                    <Link
-                      key={id}
-                      href={route.href}
-                      className="text-lg font-medium transition-colors"
-                    >
-                      {route.label}
-                    </Link>
-                  ))}
-                </nav>
+                <div className="h-full flex flex-col justify-between">
+                  <nav className="flex flex-col gap-4 ml-4 mt-4">
+                    {routes.map((route: { href: string, label: string }, id: number) => (
+                      <Link
+                        key={id}
+                        href={route.href}
+                        className="text-lg font-medium transition-colors"
+                      >
+                        {route.label}
+                      </Link>
+                    ))}
+                  </nav>
+                  <Link href="/" className="ml-2 lg:ml-0">
+                    <h1 className="text-xl font-bold">
+                      REOWN.now
+                    </h1>
+                  </Link>
+                </div>
               </SheetContent>
             </Sheet>
             <Link href="/" className="ml-2 lg:ml-0">
               <h1 className="text-xl font-bold">
-                STORE NAME
+                REOWN.now
               </h1>
             </Link>
           </div>

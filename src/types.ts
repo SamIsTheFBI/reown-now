@@ -10,7 +10,16 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 }
 
+interface Product {
+  id: string;
+  category: string;
+  name: string;
+  price: string;
+  images: string[];
+};
+
 export type {
   NextPageWithLayout,
   AppPropsWithLayout,
+  Product,
 }

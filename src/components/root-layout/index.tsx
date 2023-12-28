@@ -1,6 +1,6 @@
 import { ThemeProvider } from "next-themes"
 import { type ThemeProviderProps } from "next-themes/dist/types"
-import { Header } from "~/components"
+import { Footer, Header } from "~/components"
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "~/utils/shadcn"
 
@@ -18,6 +18,7 @@ const RootLayout = ({ children }: ThemeProviderProps) => {
       )}>
         <Header />
         {children}
+        <Footer />
       </div>
     </ThemeProvider>
   )
