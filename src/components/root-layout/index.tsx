@@ -17,7 +17,9 @@ const RootLayout = ({ children }: ThemeProviderProps) => {
         fontSans.variable
       )}>
         <Header />
-        {children}
+        <main className="main-height">
+          {children}
+        </main>
         <Footer />
       </div>
     </ThemeProvider>

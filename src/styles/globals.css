@@ -1,6 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --header-height: 80.84px;
+  --footer-height: 80.84px;
+}
+
+.main-height {
+  min-height: calc(100dvh - var(--header-height) - var(--footer-height));
+}
  
 @layer base {
   :root {

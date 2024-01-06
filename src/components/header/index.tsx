@@ -17,7 +17,7 @@ import { BiMenuAltLeft } from "react-icons/bi";
 export default function Header() {
   const { setTheme } = useTheme()
   return (
-    <div className="sm:flex sm:justify-between py-2 px-4 border-b">
+    <header className="sm:flex sm:justify-between py-2 px-4 border-b">
       <Container>
         <div className="relative px-3 sm:px-6 lg:px-8 flex h-16 items-center justify-between w-full">
           <div className="flex items-center">
@@ -42,7 +42,7 @@ export default function Header() {
                       </Link>
                     ))}
                   </nav>
-                  <Link href="/" className="ml-2 lg:ml-0">
+                  <Link href="/" className="ml-0">
                     <h1 className="text-xl font-bold">
                       REOWN.now
                     </h1>
@@ -107,6 +107,6 @@ export default function Header() {
           </div>
         </div>
       </Container>
-    </div>
+    </header>
   )
 }
