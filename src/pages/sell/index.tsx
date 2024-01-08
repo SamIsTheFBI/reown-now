@@ -36,14 +36,6 @@ const formSchema = z.object({
   price: z.coerce.number().gt(0),
 })
 
-type IFormInputs = {
-  title: string;
-  description: string;
-  category: string;
-  images: string[];
-  price: number;
-}
-
 const Sell: NextPageWithLayout = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -139,7 +131,7 @@ const Sell: NextPageWithLayout = () => {
                       {urls.map((url, i) => {
                         const filename = files[i]?.name;
                         return (
-                          <Image src={url} height={300} width={240} key={i} alt={filename as string} className="object-contain aspect-square w-24" />
+                          <Image src={url} height={300} width={240} key={i} alt={filename!} className="object-contain aspect-square w-24" />
                         );
                       })}
                     </div>
@@ -185,9 +177,9 @@ const Sell: NextPageWithLayout = () => {
               <div className="flex items-center justify-center">
                 {urls.length > 0 &&
                   <Image
-                    src={urls[0] as string}
+                    src={urls[0]!}
                     height={300} width={240}
-                    alt={files[0]?.name as string}
+                    alt={files ? files[0]?.name : "Local image"}
                     className="object-cover aspect-video h-auto w-full self-center rounded-md" />
                   || <Skeleton className="h-auto w-full aspect-video" />
                 }
