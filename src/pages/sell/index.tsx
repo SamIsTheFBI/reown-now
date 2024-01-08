@@ -127,7 +127,7 @@ const Sell: NextPageWithLayout = () => {
                 <h1 className="text-xl font-bold">Images</h1>
                 <div>
                   {urls.length > 0 &&
-                    <div className="flex items-center gap-2 bg-secondary p-2 overflow-x-scroll mb-2">
+                    <div className="flex items-center gap-2 border-2 p-2 overflow-x-auto mb-2 rounded-md">
                       {urls.map((url, i) => {
                         const filename = files[i]?.name;
                         return (
@@ -179,7 +179,7 @@ const Sell: NextPageWithLayout = () => {
                   <Image
                     src={urls[0]!}
                     height={300} width={240}
-                    alt={files ? files[0]?.name : "Local image"}
+                    alt="local image"
                     className="object-cover aspect-video h-auto w-full self-center rounded-md" />
                   || <Skeleton className="h-auto w-full aspect-video" />
                 }
