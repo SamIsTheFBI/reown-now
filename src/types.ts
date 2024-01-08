@@ -11,10 +11,10 @@ type AppPropsWithLayout = AppProps & {
 }
 
 interface Product {
-  id: string;
+  id: number;
   category: string;
-  name: string;
-  price: string;
+  title: string;
+  price: number;
   images: string[];
 };
 

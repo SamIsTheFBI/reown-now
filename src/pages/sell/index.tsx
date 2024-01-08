@@ -22,6 +22,10 @@ import {
 import { Input } from "~/components/ui/input"
 import { Textarea } from "~/components/ui/textarea";
 import { Label } from "~/components/ui/label";
+import { useState } from "react";
+import Image from "next/image";
+import { Skeleton } from "~/components/ui/skeleton";
+import { LuShoppingBag } from "react-icons/lu";
 
 const formSchema = z.object({
   title: z.string().min(2).max(50),
@@ -29,21 +33,35 @@ const formSchema = z.object({
   category: z.string({
     required_error: "Please select a product category.",
   }),
-  price: z.number().gt(0),
+  price: z.coerce.number().gt(0),
 })
 
+type IFormInputs = {
+  title: string;
+  description: string;
+  category: string;
+  images: string[];
+  price: number;
+}
+
 const Sell: NextPageWithLayout = () => {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
       description: "",
+      category: "",
+      price: 0,
     },
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
   }
+
+  const [files, setFiles] = useState<File[]>([])
+  const urls = files.map((file) => URL.createObjectURL(file));
 
   return (
     <>
@@ -56,11 +74,11 @@ const Sell: NextPageWithLayout = () => {
           </div>
         </div>
         <hr />
-        <div className="p-4 sm:p-6 flex flex-wrap-reverse justify-between gap-2">
-          <div className="grow-0">
+        <div className="p-4 sm:p-6 flex max-lg:flex-wrap justify-between gap-2">
+          <div className="grow lg:max-w-lg">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <h1 className="text-xl font-bold">Base Information</h1>
+                <h1 className="text-xl font-bold">Product Information</h1>
                 <FormField
                   control={form.control}
                   name="title"
@@ -82,8 +100,8 @@ const Sell: NextPageWithLayout = () => {
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Give a bried description of the item"
-                          className="resize-none"
+                          placeholder="Give a brief description of the item"
+                          className="resize-y"
                           {...field}
                         />
                       </FormControl>
@@ -116,9 +134,30 @@ const Sell: NextPageWithLayout = () => {
                 />
                 <h1 className="text-xl font-bold">Images</h1>
                 <div>
-                  <div id="image-preview" className="flex p-1 bg-secondary"></div>
-                  <Label htmlFor="picture">Upload an image</Label>
-                  <Input id="picture" type="file" accept="image/*" multiple />
+                  {urls.length > 0 &&
+                    <div className="flex items-center gap-2 bg-secondary p-2 overflow-x-scroll mb-2">
+                      {urls.map((url, i) => {
+                        const filename = files[i]?.name;
+                        return (
+                          <Image src={url} height={300} width={240} key={i} alt={filename as string} className="object-contain aspect-square w-24" />
+                        );
+                      })}
+                    </div>
+                  }
+                  <Label htmlFor="picture">Upload multiple images</Label>
+                  <Input
+                    id="picture"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const fileList = e.target.files
+                      if (fileList) {
+                        const fileListType = [...fileList]
+                        setFiles(fileListType)
+                      }
+                    }}
+                    multiple
+                  />
                 </div>
                 <h1 className="text-xl font-bold">Price</h1>
                 <FormField
@@ -128,7 +167,9 @@ const Sell: NextPageWithLayout = () => {
                     <FormItem>
                       <FormLabel>Price (₹)</FormLabel>
                       <FormControl>
-                        <Input placeholder="" {...field} type="number" />
+                        <Input {...field}
+                          type="number"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -138,8 +179,29 @@ const Sell: NextPageWithLayout = () => {
               </form>
             </Form>
           </div>
-          <div className="grow">
-            <h1 className="text-lg font-bold pb-2">Preview</h1>
+          <div className="grow lg:max-w-xl">
+            <h1 className="text-xl font-bold pb-2">Preview</h1>
+            <div className="bg-secondary aspect-video h-auto w-full rounded-md p-6">
+              <div className="flex items-center justify-center">
+                {urls.length > 0 &&
+                  <Image
+                    src={urls[0] as string}
+                    height={300} width={240}
+                    alt={files[0]?.name as string}
+                    className="object-cover aspect-video h-auto w-full self-center rounded-md" />
+                  || <Skeleton className="h-auto w-full aspect-video" />
+                }
+              </div>
+              <div className="flex items-center justify-between mt-5 font-bold flex-wrap overflow-hidden">
+                <h2>Product Title</h2>
+                <h2><span className="text-muted-foreground">₹</span> Cost</h2>
+              </div>
+              <div className="text-muted-foreground font-bold">Category</div>
+              <div className="grid mt-5">
+                <Button className="flex justify-center items-center gap-2"><LuShoppingBag /> Add to Cart</Button>
+              </div>
+              <div className="mt-5">Product Description</div>
+            </div>
           </div>
         </div>
       </Container>

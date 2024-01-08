@@ -7,7 +7,7 @@ import { type Product } from "~/types";
 import { Skeleton } from "../ui/skeleton";
 
 interface ProductCard {
-  data: Product;
+  data: Product | null;
 }
 
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
@@ -16,7 +16,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       <Card className="rounded-lg border-2">
         <CardContent className="pt-4">
           <div className="aspect-square relative bg-foreground/5 dark:bg-background rounded-lg">
-            {data.images?.[0] ? <Image
+            {data?.images?.[0] ? <Image
               src={data.images?.[0]}
               alt=""
               fill
@@ -28,8 +28,8 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         </CardContent>
         <CardFooter className="flex-col items-start">
           <div>
-            <p className="font-semibold text-lg">{data.name}</p>
-            <p className="text-sm text-primary/80">{data.category}</p>
+            <p className="font-semibold text-lg">{data?.title}</p>
+            <p className="text-sm text-primary/80">{data?.category}</p>
           </div>
           <div className="flex items-center justify-between">{data?.price}</div>
         </CardFooter>
