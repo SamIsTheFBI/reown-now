@@ -50,6 +50,7 @@ const Sell: NextPageWithLayout = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    console.log(files)
   }
 
   const [files, setFiles] = useState<File[]>([])
@@ -60,10 +61,6 @@ const Sell: NextPageWithLayout = () => {
       <Container>
         <div className="text-lg p-4 sm:p-6 flex justify-between items-center">
           <h1>Post an Ad</h1>
-          <div className="flex gap-4">
-            <Button variant="secondary">Save as Draft</Button>
-            <Button>Publish</Button>
-          </div>
         </div>
         <hr />
         <div className="p-4 sm:p-6 flex max-lg:flex-wrap justify-between gap-2">
@@ -78,7 +75,7 @@ const Sell: NextPageWithLayout = () => {
                     <FormItem>
                       <FormLabel>Title</FormLabel>
                       <FormControl>
-                        <Input placeholder="" {...field} />
+                        <Input type="text" placeholder="" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -167,7 +164,10 @@ const Sell: NextPageWithLayout = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Submit</Button>
+                <div className="flex gap-4">
+                  <Button variant="secondary">Save as Draft</Button>
+                  <Button type="submit">Publish</Button>
+                </div>
               </form>
             </Form>
           </div>
@@ -185,14 +185,14 @@ const Sell: NextPageWithLayout = () => {
                 }
               </div>
               <div className="flex items-center justify-between mt-5 font-bold flex-wrap overflow-hidden">
-                <h2>Product Title</h2>
-                <h2><span className="text-muted-foreground">₹</span> Cost</h2>
+                <h2>{form.watch('title') || "Product Name"}</h2>
+                <h2><span className="text-muted-foreground">₹</span> {form.watch('price') || "Price"}</h2>
               </div>
-              <div className="text-muted-foreground font-bold">Category</div>
+              <div className="text-muted-foreground font-bold capitalize">{form.watch('category') || "Category"}</div>
               <div className="grid mt-5">
                 <Button className="flex justify-center items-center gap-2"><LuShoppingBag /> Add to Cart</Button>
               </div>
-              <div className="mt-5">Product Description</div>
+              <div className="mt-5">{form.watch('description') || "Product Description"}</div>
             </div>
           </div>
         </div>

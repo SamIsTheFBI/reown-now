@@ -2,6 +2,7 @@ import { type ReactElement } from "react"
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
+import NextProgress from "next-progress"
 
 import { api } from "~/utils/api";
 
@@ -16,6 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return getLayout(
     <SessionProvider session={session as Session}>
+      <NextProgress delay={300} options={{ showSpinner: false }} />
       <Component {...pageProps} />
     </SessionProvider>
   )
