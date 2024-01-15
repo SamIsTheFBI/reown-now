@@ -18,8 +18,15 @@ interface Product {
   images: string[];
 };
 
+interface Category {
+  title: string;
+  image: string;
+  route: string;
+};
+
 export type {
   NextPageWithLayout,
   AppPropsWithLayout,
   Product,
+  Category,
 }

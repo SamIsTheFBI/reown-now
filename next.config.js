@@ -8,6 +8,17 @@ await import("./src/env.js");
 const config = {
   reactStrictMode: true,
 
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/**',
+      },
+    ]
+  },
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.
    *

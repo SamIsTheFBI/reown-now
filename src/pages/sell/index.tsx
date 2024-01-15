@@ -26,6 +26,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Skeleton } from "~/components/ui/skeleton";
 import { LuShoppingBag } from "react-icons/lu";
+import { categories } from "~/const";
 
 const formSchema = z.object({
   title: z.string().min(2).max(50),
@@ -111,10 +112,9 @@ const Sell: NextPageWithLayout = () => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="electronics">Electronics</SelectItem>
-                          <SelectItem value="fashion">Fashion</SelectItem>
-                          <SelectItem value="home">Home</SelectItem>
-                          <SelectItem value="books">Books</SelectItem>
+                          {categories.map((item) => (
+                            <SelectItem value={item.title} className="capitalize">{item.title}</SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                       <FormMessage />

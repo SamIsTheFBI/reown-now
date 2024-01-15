@@ -44,7 +44,36 @@ const products = [
   },
 ];
 
+const categories = [
+  {
+    title: "electronics",
+    image: "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    route: "electronics",
+  },
+  {
+    title: "fashion",
+    image: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?cs=srgb&dl=pexels-juan-mendez-1536619.jpg&fm=jpg&w=1280&h=853",
+    route: "fashion",
+  },
+  {
+    title: "home & decor",
+    image: "https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg?cs=srgb&dl=pexels-terje-sollie-298842.jpg&fm=jpg&w=1280&h=853",
+    route: "home",
+  },
+  {
+    title: "books",
+    image: "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?cs=srgb&dl=pexels-pixabay-159711.jpg&fm=jpg&w=1280&h=851",
+    route: "books",
+  },
+  {
+    title: "automobiles",
+    image: "https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg?cs=srgb&dl=pexels-pixabay-159192.jpg&fm=jpg&w=1280&h=892",
+    route: "automobile",
+  },
+]
+
 export {
   routes,
+  categories,
   products,
 }
