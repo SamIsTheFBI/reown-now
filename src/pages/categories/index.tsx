@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Container, RootLayout } from "~/components";
 import CategoryList from "~/components/category-list";
 import { categories } from "~/const";
-import { NextPageWithLayout } from "~/types";
+import { type NextPageWithLayout } from "~/types";
 
 const Categories: NextPageWithLayout = () => {
   return (

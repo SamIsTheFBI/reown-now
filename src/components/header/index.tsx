@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Container, ProfileButton } from "..";
 import { routes } from "~/const";
 import { Button } from "../ui/button";
-import { LuShoppingBag } from "react-icons/lu";
 import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
 import { useTheme } from "next-themes";
 import {
@@ -70,15 +69,6 @@ export default function Header() {
             ))}
           </nav>
           <div className="flex items-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="mr-2"
-              aria-label="Shopping Cart"
-            >
-              <LuShoppingBag className="w-6 h-6" />
-              <span className="sr-only">Shopping Cart</span>
-            </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button

@@ -113,7 +113,7 @@ const Sell: NextPageWithLayout = () => {
                         </FormControl>
                         <SelectContent>
                           {categories.map((item) => (
-                            <SelectItem value={item.title} className="capitalize">{item.title}</SelectItem>
+                            <SelectItem key={item.route} value={item.title} className="capitalize">{item.title}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>

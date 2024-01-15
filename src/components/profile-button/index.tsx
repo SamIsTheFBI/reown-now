@@ -13,8 +13,8 @@ const ProfileButton = () => {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src="https://github.com/samisthefbi.png" />
+          <AvatarFallback>Sam</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mr-6 mt-2">

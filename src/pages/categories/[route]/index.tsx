@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Container, RootLayout } from "~/components";
-import { NextPageWithLayout } from "~/types";
+import { type NextPageWithLayout } from "~/types";
 
 const CategoryRoute: NextPageWithLayout = () => {
   const router = useRouter()
