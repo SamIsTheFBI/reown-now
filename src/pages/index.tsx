@@ -3,10 +3,11 @@ import Link from "next/link";
 import { FaBox } from "react-icons/fa";
 import { Container, ProductList, RootLayout } from "~/components";
 import { Button } from "~/components/ui/button";
-import { products } from "~/const";
 import { type NextPageWithLayout } from "~/types";
+import { api } from "~/utils/api";
 
 const Home: NextPageWithLayout = () => {
+  const products = api.product.listAll.useQuery()
 
   return (
     <>
@@ -37,7 +38,10 @@ const Home: NextPageWithLayout = () => {
           </div>
           <div className="px-4 sm:px-6 lg:px-8 text-xl font-bold ">Available for Sale Near You</div>
           <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-            <ProductList items={products} />
+            {
+              products.data &&
+              <ProductList items={products?.data} />
+            }
           </div>
         </div>
       </Container>

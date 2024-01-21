@@ -5,12 +5,17 @@ import { Card, CardContent, CardFooter } from "~/components/ui/card";
 
 import { type Product } from "~/types";
 import { Skeleton } from "../ui/skeleton";
+import { api } from "~/utils/api";
 
 interface ProductCard {
   data: Product | null;
 }
 
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
+  const categories = api.category.list.useQuery()
+  const category = categories?.data?.find((cat) => cat.id === data?.id)
+
+  console.log(category?.name)
   return (
     <Link href="/" className="outline-0 focus:ring-2 hover:ring-2 ring-primary transition duration-300 rounded-lg">
       <Card className="rounded-lg border-2">
@@ -28,10 +33,10 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
         </CardContent>
         <CardFooter className="flex-col items-start">
           <div>
-            <p className="font-semibold text-lg">{data?.title}</p>
-            <p className="text-sm text-primary/80">{data?.category}</p>
+            <p className="font-semibold text-lg">{data?.name}</p>
+            <p className="text-sm text-primary/80 capitalize">{category?.name}</p>
           </div>
-          <div className="flex items-center justify-between">{data?.price}</div>
+          <div className="flex items-center justify-between">₹ {data?.price}</div>
         </CardFooter>
       </Card>
     </Link>

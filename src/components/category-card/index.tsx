@@ -16,8 +16,8 @@ const CategoryCard: React.FC<CategoryCard> = ({ data }) => {
       <Card className="rounded-lg border-2">
         <CardContent className="pt-4">
           <div className="aspect-square relative bg-foreground/5 dark:bg-background rounded-lg">
-            {data?.image ? <Image
-              src={data.image}
+            {data?.imageUrl ? <Image
+              src={data.imageUrl}
               alt=""
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
@@ -28,7 +28,7 @@ const CategoryCard: React.FC<CategoryCard> = ({ data }) => {
           </div>
         </CardContent>
         <CardFooter className="flex-col items-start">
-          <p className="font-semibold text-lg capitalize">{data?.title}</p>
+          <p className="font-semibold text-lg capitalize">{data?.name}</p>
         </CardFooter>
       </Card>
     </Link>

@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { Container, RootLayout } from "~/components";
 import CategoryList from "~/components/category-list";
-import { categories } from "~/const";
 import { type NextPageWithLayout } from "~/types";
+import { api } from "~/utils/api";
 
 const Categories: NextPageWithLayout = () => {
+  const categories = api.category.list.useQuery()
   return (
     <>
       <Container>
@@ -26,7 +27,12 @@ const Categories: NextPageWithLayout = () => {
           </div>
           <div className="px-4 sm:px-6 lg:px-8 text-xl font-bold ">Available Categories</div>
           <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-            <CategoryList categories={categories} />
+            {
+              categories?.data &&
+              <CategoryList
+                categories={categories?.data}
+              />
+            }
           </div>
         </div>
       </Container>

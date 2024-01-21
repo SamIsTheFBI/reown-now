@@ -12,16 +12,21 @@ type AppPropsWithLayout = AppProps & {
 
 interface Product {
   id: number;
-  category: string;
-  title: string;
+  name: string;
+  description: string;
   price: number;
-  images: string[];
+  categoryId: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+  images?: string[];
 };
 
 interface Category {
-  title: string;
-  image: string;
+  id: number;
+  name: string;
+  imageUrl: string | null;
   route: string;
+  products?: Product[];
 };
 
 export type {

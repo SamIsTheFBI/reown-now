@@ -7,6 +7,7 @@ import { cn } from "~/utils/shadcn"
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+  adjustFontFallback: false,
 })
 
 const RootLayout = ({ children }: ThemeProviderProps) => {

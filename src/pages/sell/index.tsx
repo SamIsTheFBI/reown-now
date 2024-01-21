@@ -26,10 +26,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { Skeleton } from "~/components/ui/skeleton";
 import { LuShoppingBag } from "react-icons/lu";
-import { categories } from "~/const";
+import { api } from "~/utils/api";
 
 const formSchema = z.object({
-  title: z.string().min(2).max(50),
+  name: z.string().min(2).max(50),
   description: z.string().min(2).max(150),
   category: z.string({
     required_error: "Please select a product category.",
@@ -39,10 +39,12 @@ const formSchema = z.object({
 
 const Sell: NextPageWithLayout = () => {
 
+  const categories = api.category.list.useQuery()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
+      name: "",
       description: "",
       category: "",
       price: 0,
@@ -71,10 +73,10 @@ const Sell: NextPageWithLayout = () => {
                 <h1 className="text-xl font-bold">Product Information</h1>
                 <FormField
                   control={form.control}
-                  name="title"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Title</FormLabel>
+                      <FormLabel>name</FormLabel>
                       <FormControl>
                         <Input type="text" placeholder="" {...field} />
                       </FormControl>
@@ -112,8 +114,8 @@ const Sell: NextPageWithLayout = () => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {categories.map((item) => (
-                            <SelectItem key={item.route} value={item.title} className="capitalize">{item.title}</SelectItem>
+                          {categories?.data?.map((item) => (
+                            <SelectItem key={item.route} value={item.name} className="capitalize">{item.name}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -165,8 +167,8 @@ const Sell: NextPageWithLayout = () => {
                   )}
                 />
                 <div className="flex gap-4">
-                  <Button variant="secondary">Save as Draft</Button>
                   <Button type="submit">Publish</Button>
+                  <Button variant="secondary">Save as Draft</Button>
                 </div>
               </form>
             </Form>
@@ -184,15 +186,17 @@ const Sell: NextPageWithLayout = () => {
                   || <Skeleton className="h-auto w-full aspect-video" />
                 }
               </div>
-              <div className="flex items-center justify-between mt-5 font-bold flex-wrap overflow-hidden">
-                <h2>{form.watch('title') || "Product Name"}</h2>
+              <div className="flex items-center justify-between mt-5 font-bold flex-nowrap gap-16 overflow-hidden text-balance">
+                <h2>{form.watch('name') || "Product Name"}</h2>
                 <h2><span className="text-muted-foreground">₹</span> {form.watch('price') || "Price"}</h2>
               </div>
               <div className="text-muted-foreground font-bold capitalize">{form.watch('category') || "Category"}</div>
               <div className="grid mt-5">
                 <Button className="flex justify-center items-center gap-2"><LuShoppingBag /> Add to Cart</Button>
               </div>
-              <div className="mt-5">{form.watch('description') || "Product Description"}</div>
+              <div className="mt-5 text-balance">
+                <p>{form.watch('description') || "Product Description"}</p>
+              </div>
             </div>
           </div>
         </div>
