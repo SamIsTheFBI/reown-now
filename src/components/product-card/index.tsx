@@ -15,7 +15,6 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
   const categories = api.category.list.useQuery()
   const category = categories?.data?.find((cat) => cat.id === data?.id)
 
-  console.log(category?.name)
   return (
     <Link href="/" className="outline-0 focus:ring-2 hover:ring-2 ring-primary transition duration-300 rounded-lg">
       <Card className="rounded-lg border-2">
