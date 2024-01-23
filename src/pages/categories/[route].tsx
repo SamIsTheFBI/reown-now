@@ -27,4 +27,3 @@ CategoryRoute.getLayout = (page) => {
 }
 
 export default CategoryRoute
-

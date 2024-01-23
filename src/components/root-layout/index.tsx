@@ -1,8 +1,11 @@
 import { ThemeProvider } from "next-themes"
-import { type ThemeProviderProps } from "next-themes/dist/types"
 import { Footer, Header } from "~/components"
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "~/utils/shadcn"
+import NextProgress from "next-progress"
+import { SessionProvider } from "next-auth/react";
+import { type Session } from "next-auth";
+import { type ReactNode } from "react"
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -10,20 +13,28 @@ export const fontSans = FontSans({
   adjustFontFallback: false,
 })
 
-const RootLayout = ({ children }: ThemeProviderProps) => {
+type RootLayoutProps = {
+  children: ReactNode;
+  session?: Session | null;
+}
+
+const RootLayout = ({ children, session }: RootLayoutProps) => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className={cn(
-        "min-h-screen bg-background font-sans antialiased",
-        fontSans.variable
-      )}>
-        <Header />
-        <main className="main-height">
-          {children}
-        </main>
-        <Footer />
-      </div>
-    </ThemeProvider>
+    <SessionProvider session={session}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <div className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}>
+          <NextProgress delay={300} options={{ showSpinner: false }} />
+          <Header />
+          <main className="main-height">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
 

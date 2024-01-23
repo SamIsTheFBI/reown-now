@@ -22,11 +22,13 @@ import {
 import { Input } from "~/components/ui/input"
 import { Textarea } from "~/components/ui/textarea";
 import { Label } from "~/components/ui/label";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Skeleton } from "~/components/ui/skeleton";
 import { LuShoppingBag } from "react-icons/lu";
 import { api } from "~/utils/api";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -38,9 +40,16 @@ const formSchema = z.object({
 })
 
 const Sell: NextPageWithLayout = () => {
+  const { data: sessionData } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!sessionData) {
+      router.push("/sign-in")
+    }
+  }, [])
 
   const categories = api.category.list.useQuery()
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
